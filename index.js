@@ -2,33 +2,22 @@
 
 function handleDogImg(responseJson) {
     let randomDogImg = responseJson.message;
-    let responseStatus = responseJson.status;
-    if (responseStatus === "error"){
-        alert(randomDogImg);
-    }
-    else {
-        $(".results").append(`<div class="dog-img"><img src="${randomDogImg}" alt="Picture of dog"></div>`);
-    }
+    $(".results-img").replaceWith(`<img src="${randomDogImg}" alt="Picture of dog" class="results-img">`);
+    $(".results").removeClass("hidden");
 }
 
 function getDogImages(userInput) {
     fetch(`https://dog.ceo/api/breed/${userInput}/images/random`)
-        .then(response => response.json())
+        .then(response => response.ok ? response.json() : Promise.reject({err : response.status}))
         .then(responseJson => handleDogImg(responseJson))
+        .catch(error => alert("No matching dog breed found.", error));
 }
 
 function handleSubmitClicked() {
     $("form").submit(event => {
         event.preventDefault();
         let userInput = $("input").val()
-        if (userInput === "") {
-            alert("Please enter a dog breed.");
-        }
-        else {
-            $(".results").empty();            
-            $(".results").append("<h2>Here is a random picture of a fur baby you asked for!</h2>")
-            getDogImages(userInput);
-        }
+        getDogImages(userInput);
     });
 }
 

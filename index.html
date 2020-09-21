@@ -14,10 +14,12 @@
     <main>
         <form>
             <label for="dog-breeds-input">Which dog breed would you like to see pictures of?</label>
-            <input type="text" class="dog-breeds-input" placeholder="e.g. poodle, retriever, pug...">
+            <input type="text" class="dog-breeds-input" placeholder="e.g. poodle, retriever, pug..." required>
             <button type="submit" class="js-submit-input">Go Fetch!</button>            
         </form>
-        <section class="results">
+        <section class="results hidden">
+            <h2>Here's that fur baby you asked for!</h2>
+            <img class="results-img" alt="placeholder">
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
